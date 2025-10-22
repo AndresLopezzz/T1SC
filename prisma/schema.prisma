@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Tipo {
+  id    Int     @id @default(autoincrement())
+  nombre String @unique
+  tarjetas Tarjeta[]
+}
+
+model Ciudad {
+  id    Int     @id @default(autoincrement())
+  nombre String @unique
+  tarjetas Tarjeta[]
+}
+
+model Tarjeta {
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  tipoId   Int
+  tipo     Tipo   @relation(fields: [tipoId], references: [id])
+  poder    Int
+  ciudadId Int
+  ciudad   Ciudad @relation(fields: [ciudadId], references: [id])
+  imagenUrl String
+}
+
+model Confederacion {
+  id    Int     @id @default(autoincrement())
+  nombre String @unique
+  selecciones Seleccion[]
+}
+
+model Seleccion {
+  id             Int            @id @default(autoincrement())
+  pais           String         @unique
+  confederacionId Int
+  confederacion  Confederacion  @relation(fields: [confederacionId], references: [id])
+  vecesCampeon   Int            @default(0)
+  escudoUrl      String?
+  jugadores      Jugador[]
+}
+
+model Jugador {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  edad        Int
+  seleccionId Int
+  seleccion   Seleccion @relation(fields: [seleccionId], references: [id])
+  imagenUrl   String?
+  dribling    Int       @default(0)
+  velocidad   Int       @default(0)
+  regate      Int       @default(0)
+  // Puedes agregar más estadísticas aquí, como 'pase' o 'defensa'
+}
