@@ -31,6 +31,7 @@ El servidor corre en http://localhost:3000.
 - `GET /confederaciones` - Lista confederaciones
 - `GET /selecciones` - Lista selecciones (con confederación)
 - `GET /selecciones/:id` - Detalle de una selección (con jugadores)
+- `GET /selecciones/:id/jugadores` - Lista jugadores de una selección
 - `POST /selecciones` - Crear selección (JSON: { pais, confederacionId, vecesCampeon, escudoUrl })
 - `GET /jugadores` - Lista jugadores (con selección)
 - `GET /jugadores/:id` - Detalle de un jugador
